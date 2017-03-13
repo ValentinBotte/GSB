@@ -1,9 +1,9 @@
 <div class="row">    
-    <h2>Renseigner ma fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?></h2>
+    <h2>Renseigner ma fiche de frais du mois {{ $mois }} - {{ $annee }}</h2>
     <h3>Eléments forfaitisés</h3>
     <div class="col-md-4">
         <form method="post" action="index.php?uc=gererFrais&action=validerMajFraisForfait" role="form">
-            <fieldset>       
+            <fieldset>
                 <?php
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
