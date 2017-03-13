@@ -17,8 +17,6 @@
                         <option value="">{{ $unMois->mois }}</option>
                     @endforeach
 
-
-
                 </select>
             </div>
             <input id="ok" type="submit" value="Valider" class="btn btn-success" role="button" />
