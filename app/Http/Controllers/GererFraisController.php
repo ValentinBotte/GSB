@@ -24,7 +24,7 @@ class GererFraisController extends Controller
         $annee = date("Y");
         $moisAnnee = '200101';
         $user = Auth::user();
-        $lesFraisForfait = DB::table('lignefraisforfait')->select('idvisiteur')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->orderBy('lignefraisforfait.mois', 'desc')->get();
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->get();
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }

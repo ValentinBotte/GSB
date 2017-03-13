@@ -11,7 +11,7 @@
                     @foreach ($lesFraisForfait as $unFrais)
                             <div class="form-group">
                                 <label for="idFrais">{{ $unFrais->libelle }}</label>
-                                <input type="text" id="idFrais" name="lesFrais[{{ $unFrais->idfrais }}]" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
+                                <input type="text" id="idFrais" name="lesFrais[{{ $unFrais->idfraisforfait }}]" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
                             </div>
                     @endforeach
                     <button class="btn btn-success" type="submit">Ajouter</button>
