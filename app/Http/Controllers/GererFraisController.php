@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GererFraisController extends Controller
 {
@@ -19,8 +21,11 @@ class GererFraisController extends Controller
     public function afficherRf(){
         $mois = date("m");
         $annee = date("Y");
-        $idVisiteur = $_SESSION['idVisiteur'];
-        $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-        return View('v_listeFraisForfait', compact('mois','annee'));
+        $moisAnnee = $annee . $mois;
+        $user = Auth::user();
+
+        $lesFraisForfait = DB::table('lignefraisforfait')->select('idvisiteur')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->get();
+        return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }
 }
