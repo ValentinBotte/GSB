@@ -35,6 +35,8 @@
 
             @yield('content')
 
+            @yield('content_secondary')
+
         </div>
 
     </body>
