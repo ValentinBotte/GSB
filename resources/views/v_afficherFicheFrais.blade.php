@@ -7,13 +7,14 @@
             <h3>Sélectionner un mois : </h3>
         </div>
         <div class="col-md-4">
-            <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post" role="form">
+            <form action="" method="post" role="form">
+                {{ csrf_field() }}
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
-                    <select id="lstMois" name="lstMois" class="form-control">
+                    <select id="lstMois" name="mois" class="form-control">
 
                         @foreach ($mois as $unMois)
-                            <option value="">{{ $unMois->mois }}</option>
+                            <option value="{{ $unMois->mois }}">{{ $unMois->mois }}</option>
                         @endforeach
 
                     </select>

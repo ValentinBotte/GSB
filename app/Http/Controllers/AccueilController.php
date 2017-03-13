@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AccueilController extends Controller
 {
@@ -37,6 +38,23 @@ class AccueilController extends Controller
         }
 
         return View('v_afficherFicheFrais', compact('mois'));
+    }
+
+    /*
+     *  CONTROLER AFFICHAGE FICHE DE FRAIS POST
+     */
+    public function afficherFdfPost(){
+
+        $moisPost = Input::get('mois');
+        $user = Auth::user();
+
+        // Variables de retour
+        $numMois = substr($moisPost, 0, 2);
+        $numAnnee = substr($moisPost, 3, 8);
+
+        $libEtat = DB::table('etat')->select('libelle')->where('id', '')
+
+        //return View('v_afficherFicheFrais', compact('mois'));
     }
 
 
