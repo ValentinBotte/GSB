@@ -5,7 +5,7 @@
         <h2>Renseigner ma fiche de frais du mois {{ $mois }} - {{ $annee }}</h2>
         <h3>Eléments forfaitisés</h3>
         <div class="col-md-4">
-            <form method="post" action="{{ url('afficher_renseigner_frais/fraisforfait') }}" role="form">
+            <form method="post" action="" role="form">
                 {{ csrf_field() }}
                 <fieldset>
                     @foreach ($lesFraisForfait as $unFrais)
@@ -53,7 +53,8 @@
     <div class="row">
         <h3>Nouvel élément hors forfait</h3>
         <div class="col-md-4">
-            <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post" role="form">
+            <form action="{{ url('afficher_renseigner_frais/fraisforfait') }}" method="post" role="form">
+                {{ csrf_field() }}
                 <div class="form-group">
                     <label for="txtDateHF">Date (jj/mm/aaaa): </label>
                     <input type="text" id="txtDateHF" name="dateFrais" class="form-control" id="text">
