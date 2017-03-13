@@ -53,7 +53,7 @@
     <div class="row">
         <h3>Nouvel élément hors forfait</h3>
         <div class="col-md-4">
-            <form action="{{ url('afficher_renseigner_frais/fraisforfait') }}" method="post" role="form">
+            <form action="{{ url('afficher_renseigner_frais') }}" method="post" role="form">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="txtDateHF">Date (jj/mm/aaaa): </label>

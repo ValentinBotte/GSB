@@ -21,11 +21,11 @@
             <div class="header">
                 <div class="row vertical-align">
                     <div class="col-md-4">
-                        <h1><img src="./images/logo.jpg" class="img-responsive" alt="Laboratoire Galaxy-Swiss Bourdin" title="Laboratoire Galaxy-Swiss Bourdin"></h1>
+                        <h1><img src="../public/images/logo.jpg" class="img-responsive" alt="Laboratoire Galaxy-Swiss Bourdin" title="Laboratoire Galaxy-Swiss Bourdin"></h1>
                     </div>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right" role="tablist">
-                            <li><a href="index.php">Accueil</a></li>
+                            <li><a href="../public/">Accueil</a></li>
                             <li><a href="{{ url('afficher_renseigner_frais') }}"><span class="glyphicon glyphicon-pencil"></span> Renseigner la fiche de frais</a></li>
                             <li><a href="{{ url('afficher_fiche_de_frais') }}"><span class="glyphicon glyphicon-list-alt"></span> Afficher mes fiches de frais</a></li>
                             <li><a href="{{ url('deconnexion') }}">Déconnexion</a></li>

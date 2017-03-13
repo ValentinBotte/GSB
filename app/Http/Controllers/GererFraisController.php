@@ -22,7 +22,7 @@ class GererFraisController extends Controller
     public function afficherRf(){
         $mois = date("m");
         $annee = date("Y");
-        $moisAnnee = '200101';
+        $moisAnnee = $annee.$mois;
         $user = Auth::user();
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->orderBy('lignefraisforfait.mois', 'desc')->get();
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->get();
@@ -30,7 +30,9 @@ class GererFraisController extends Controller
     }
 
     public function ajoutFraisForfait(){
-        $moisAnnee = '200101';
+        $mois = date("m");
+        $annee = date("Y");
+        $moisAnnee = $annee.$mois;
         $user = Auth::user();
         $dateFrais = Input::get('dateFrais');
         $libelle = Input::get('libelle');

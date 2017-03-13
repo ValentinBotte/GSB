@@ -11,7 +11,7 @@ Route::get('/afficher_fiche_de_frais', 'AccueilController@afficherFdf');
 
 Route::get('/afficher_renseigner_frais', 'GererFraisController@afficherRf');
 
-Route::post('/afficher_renseigner_frais/fraisforfait', 'GererFraisController@ajoutFraisForfait');
+Route::post('/afficher_renseigner_frais', 'GererFraisController@ajoutFraisForfait');
 
 //
 
