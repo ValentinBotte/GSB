@@ -45,19 +45,27 @@ class AccueilController extends Controller
      */
     public function afficherFdfPost(){
 
-        $moisPost = Input::get('mois');
         $user = Auth::user();
-        $mois = substr($moisPost, 3, 8) . substr($moisPost, 0, 2);
-        $fiche = DB::table('fichefrais')->where('idvisiteur', $user->id)->where('mois', $mois)->get();
+
+        //Ancienne variable pour affFdf
+        $mois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->orderBy('mois', 'desc')->get();
+        foreach($mois as $unMois){
+            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+            $unMois->mois = $tempMois;
+        }
+
+        $moisPost = Input::get('mois');
+        $leMois = substr($moisPost, 3, 8) . substr($moisPost, 0, 2);
+        $fiche = DB::table('fichefrais')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
 
         // Variables de retour
         $numMois = substr($moisPost, 0, 2);
         $numAnnee = substr($moisPost, 3, 8);
 
-        $libEtat = DB::table('etat')->select('libelle')->where('id', $fiche->idetat)->get();
+        $libEtat = DB::table('etat')->select('libelle')->where('id', $fiche[0]->idetat)->get()[0]->libelle;
+        $dateModif = $fiche[0]->datemodif;
 
-        dd($libEtat);
-        //return View('v_afficherFicheFrais', compact('mois'));
+        return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'mois'));
     }
 
 

@@ -29,4 +29,15 @@
 
 @section('content_secondary')
 
+    @if( ! empty($numMois))
+        <hr>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Fiche de frais du mois {{ $numMois }} - {{ $numAnnee }} : </div>
+            <div class="panel-body">
+                <strong><u>Etat :</u></strong> {{ $libEtat }} depuis le {{ $dateModif }} <br>
+
+            </div>
+        </div>
+    @endif
+
 @endsection
