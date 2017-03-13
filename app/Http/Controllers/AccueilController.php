@@ -47,13 +47,16 @@ class AccueilController extends Controller
 
         $moisPost = Input::get('mois');
         $user = Auth::user();
+        $mois = substr($moisPost, 3, 8) . substr($moisPost, 0, 2);
+        $fiche = DB::table('fichefrais')->where('idvisiteur', $user->id)->where('mois', $mois)->get();
 
         // Variables de retour
         $numMois = substr($moisPost, 0, 2);
         $numAnnee = substr($moisPost, 3, 8);
 
-        $libEtat = DB::table('etat')->select('libelle')->where('id', '')
+        $libEtat = DB::table('etat')->select('libelle')->where('id', $fiche->idetat)->get();
 
+        dd($libEtat);
         //return View('v_afficherFicheFrais', compact('mois'));
     }
 
