@@ -13,10 +13,20 @@ class AccueilController extends Controller
         $this->middleware('auth');
     }
 
-
+    /*
+     *  INDEX
+     */
     public function index(){
         $user = Auth::user();
         return View('v_accueil', compact('user'));
+    }
+
+
+    /*
+     *  CONTROLER AFFICHAGE FICHE DE FRAIS
+     */
+    public function afficherFdf(){
+        return View('v_listeMois');
     }
 
 
