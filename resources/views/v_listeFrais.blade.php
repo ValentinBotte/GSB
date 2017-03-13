@@ -5,7 +5,8 @@
         <h2>Renseigner ma fiche de frais du mois {{ $mois }} - {{ $annee }}</h2>
         <h3>Eléments forfaitisés</h3>
         <div class="col-md-4">
-            <form method="post" action="index.php?uc=gererFrais&action=validerMajFraisForfait" role="form">
+            <form method="post" action="{{ url('afficher_renseigner_frais/fraisforfait') }}" role="form">
+                {{ csrf_field() }}
                 <fieldset>
                     @foreach ($lesFraisForfait as $unFrais)
                             <div class="form-group">
@@ -37,10 +38,6 @@
                 </thead>
                 <tbody>
                 @foreach ($lesFraisHorsForfait as $unFraisHorsForfait)
-                $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-                $date = $unFraisHorsForfait['date'];
-                $montant = $unFraisHorsForfait['montant'];
-                $id = $unFraisHorsForfait['id'];
                 <tr>
                     <td>{{$unFraisHorsForfait->date}}</td>
                     <td>{{$unFraisHorsForfait->libelle}}</td>

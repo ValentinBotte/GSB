@@ -28,4 +28,9 @@ class GererFraisController extends Controller
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->get();
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }
+
+    public function ajoutFraisForfait(){
+
+        return $this->afficherRf();
+    }
 }
