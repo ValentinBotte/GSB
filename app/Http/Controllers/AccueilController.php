@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AccueilController extends Controller
@@ -26,7 +27,16 @@ class AccueilController extends Controller
      *  CONTROLER AFFICHAGE FICHE DE FRAIS
      */
     public function afficherFdf(){
-        return View('v_listeMois');
+
+        $user = Auth::user();
+        $mois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->orderBy('mois', 'desc')->get();
+
+        foreach($mois as $unMois){
+            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+            $unMois->mois = $tempMois;
+        }
+
+        return View('v_listeMois', compact('mois'));
     }
 
 
