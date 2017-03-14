@@ -42,7 +42,7 @@
                     <td>{{$unFraisHorsForfait->date}}</td>
                     <td>{{$unFraisHorsForfait->libelle}}</td>
                     <td>{{$unFraisHorsForfait->montant}}</td>
-                    <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais={{$unFraisHorsForfait->id}}"
+                    <td><a href="{{ url("afficher_renseigner_frais/$unFraisHorsForfait->id") }}"
                            onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
                 </tr>
                 @endforeach

@@ -9,6 +9,8 @@ Route::get('/afficher_fiche_de_frais', 'AccueilController@afficherFdf');
 
 // FRAIS
 
+Route::get('/afficher_renseigner_frais/{id}', 'GererFraisController@supprimerFiche');
+
 Route::get('/afficher_renseigner_frais', 'GererFraisController@afficherRf');
 
 Route::post('/afficher_renseigner_frais', 'GererFraisController@ajoutFraisForfait');
