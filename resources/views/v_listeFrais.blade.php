@@ -5,13 +5,13 @@
         <h2>Renseigner ma fiche de frais du mois {{ $mois }} - {{ $annee }}</h2>
         <h3>Eléments forfaitisés</h3>
         <div class="col-md-4">
-            <form method="post" action="" role="form">
+            <form method="post" action="{{ url('afficher_renseigner_frais') }}" role="form">
                 {{ csrf_field() }}
                 <fieldset>
                     @foreach ($lesFraisForfait as $unFrais)
                             <div class="form-group">
                                 <label for="idFrais">{{ $unFrais->libelle }}</label>
-                                <input type="text" id="idFrais" name="lesFrais[{{ $unFrais->idfraisforfait }}]" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
+                                <input type="text" id="idFrais" name="lesFrais{{ $unFrais->idfraisforfait }}" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
                             </div>
                     @endforeach
                     <button class="btn btn-success" type="submit">Ajouter</button>

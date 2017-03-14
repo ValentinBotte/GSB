@@ -51,6 +51,17 @@ class GererFraisController extends Controller
         $dateFrais = Input::get('dateFrais');
         $libelle = Input::get('libelle');
         $montant = Input::get('montant');
+        $fraisEtp = Input::get('lesFraisETP');
+        $fraisKm = Input::get('lesFraisKM');
+        $fraisNui = Input::get('lesFraisNUI');
+        $fraisRep = Input::get('lesFraisREP');
+        if($fraisEtp!=null and $fraisKm!=null and $fraisNui!=null and $fraisRep!=null){
+            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'NUI')->update(['quantite' => $fraisNui]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'ETP')->update(['quantite' => $fraisEtp]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'REP')->update(['quantite' => $fraisRep]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'KM')->update(['quantite' => $fraisKm]);
+        }
+
         if($dateFrais!=null and $libelle!=null and $montant!=null){
             list($jour, $mois, $annee ) = explode('/', $dateFrais);
             if(checkdate($mois,$jour,$annee)){
