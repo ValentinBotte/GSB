@@ -13,6 +13,8 @@ class GererFraisController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->mois = date('m');
+        $this->annee = date('Y');
     }
 
     /*
@@ -20,11 +22,27 @@ class GererFraisController extends Controller
      */
 
     public function afficherRf(){
-        $mois = date("m");
-        $annee = date("Y");
+        $mois = $this->mois;
+        $annee = $this->annee;
+        // variable test
         $moisAnnee = $annee.$mois;
+        //$moisAnnee = $annee.$mois;
+        $dateModif = date('Y-m-d');
         $user = Auth::user();
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $result = count($lesFraisForfait);
+        // SI IL N'Y A PAS DE VALEUR POUR CE MOIS
+        if($result == 0){
+            DB::table('fichefrais')->insert(
+                ['idvisiteur' => $user->id, 'mois' => $moisAnnee,  'nbjustificatifs' => 0, 'montantvalide' => 0, 'datemodif' => $dateModif, 'idetat' => 'CR' ]
+            );
+            $lesId = DB::table('fraisforfait')->select('id')->get();
+            foreach ($lesId as $id){
+                DB::table('lignefraisforfait')->insert(
+                    ['idvisiteur' => $user->id, 'mois' => $moisAnnee,  'idfraisforfait' => $id->id, 'quantite' => 0]
+                );
+            }
+        }
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $moisAnnee)->get();
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }
@@ -32,7 +50,9 @@ class GererFraisController extends Controller
     public function ajoutFraisForfait(){
         $mois = date("m");
         $annee = date("Y");
-        $moisAnnee = $annee.$mois;
+        // variable test
+        $moisAnnee = '200101';
+        //$moisAnnee = $annee.$mois;
         $user = Auth::user();
         $dateFrais = Input::get('dateFrais');
         $libelle = Input::get('libelle');
