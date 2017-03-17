@@ -64,8 +64,9 @@ class AccueilController extends Controller
 
         $libEtat = DB::table('etat')->select('libelle')->where('id', $fiche[0]->idetat)->get()[0]->libelle;
         $dateModif = $fiche[0]->datemodif;
-
-        return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'mois'));
+        $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
+        return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'mois','lesFraisHorsForfait','lesFraisForfait'));
     }
 
 

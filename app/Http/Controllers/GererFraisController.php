@@ -41,7 +41,15 @@ class GererFraisController extends Controller
                 );
             }
         }
-        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->get();
+        $lesFraisHorsForfait = [];
+        $listeHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->get();
+        foreach ( $listeHorsForfait as $item){
+            $libelle = $item->libelle;
+            $verif = preg_match("#REFUSE#i","'.$libelle'");
+            if($verif == 0){
+                $lesFraisHorsForfait[] = $item;
+            }
+        }
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }
 
@@ -77,7 +85,12 @@ class GererFraisController extends Controller
 
     public function supprimerFiche($id){
         $data['id'] = $id;
-        DB::table('lignefraishorsforfait')->where('id', '=', $data)->delete();
+        $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
+        $libelle = $libelleObjet[0]->libelle;
+        $verif = preg_match("#REFUSE#i","'.$libelle'");
+        if($verif == 0){
+            DB::table('lignefraishorsforfait')->where('id', '=', $data)->update(['libelle' => '[REFUSE]'.$libelle]);
+        }
         url('afficher_renseigner_frais');
         return $this->afficherRf();
     }

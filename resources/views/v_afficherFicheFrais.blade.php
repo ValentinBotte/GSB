@@ -38,6 +38,50 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h3>Eléments forfaitisés</h3></div>
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th class="ETP">libelle</th>
+                        <th class="KM">quantité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($lesFraisForfait as $unFraisForfait)
+                        <tr>
+                            <td>{{$unFraisForfait->libelle}}</td>
+                            <td>{{$unFraisForfait->quantite}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h3>Eléments hors forfait</h3></div>
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th class="date">Date</th>
+                        <th class="libelle">Libellé</th>
+                        <th class="montant">Montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($lesFraisHorsForfait as $unFraisHorsForfait)
+                        <tr>
+                            <td>{{$unFraisHorsForfait->date}}</td>
+                            <td>{{$unFraisHorsForfait->libelle}}</td>
+                            <td>{{$unFraisHorsForfait->montant}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     @endif
 
 @endsection
