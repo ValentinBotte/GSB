@@ -82,15 +82,22 @@ class GererFraisController extends Controller
 
         return $this->afficherRf();
     }
+    // FONCTION QUI AJOUTE REFUSE SUR LE LIBELLE
+//    public function supprimerFiche($id){
+//        $data['id'] = $id;
+//        $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
+//        $libelle = $libelleObjet[0]->libelle;
+//        $verif = preg_match("#REFUSE#i","'.$libelle'");
+//        if($verif == 0){
+//            DB::table('lignefraishorsforfait')->where('id', '=', $data)->update(['libelle' => '[REFUSE]'.$libelle]);
+//        }
+//        url('afficher_renseigner_frais');
+//        return $this->afficherRf();
+//    }
 
     public function supprimerFiche($id){
         $data['id'] = $id;
-        $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
-        $libelle = $libelleObjet[0]->libelle;
-        $verif = preg_match("#REFUSE#i","'.$libelle'");
-        if($verif == 0){
-            DB::table('lignefraishorsforfait')->where('id', '=', $data)->update(['libelle' => '[REFUSE]'.$libelle]);
-        }
+        DB::table('lignefraishorsforfait')->where('id', '=', $data)->delete();
         url('afficher_renseigner_frais');
         return $this->afficherRf();
     }

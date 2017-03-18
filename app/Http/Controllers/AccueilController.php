@@ -20,7 +20,12 @@ class AccueilController extends Controller
      */
     public function index(){
         $user = Auth::user();
-        return View('v_accueil', compact('user'));
+        if($user->comptable == 0){
+            return View('v_accueil', compact('user'));
+        }else{
+            return View('v_accueilComptable', compact('user'));
+        }
+
     }
 
 
