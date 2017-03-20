@@ -19,18 +19,21 @@ class ComptableFraisController extends Controller
 
     public function valideFrais(){
 
+        $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
+
+        return View('v_afficherValideFrais', compact('lesVisiteurs'));
+    }
+
+    public function getMois(){
         $afficheMois=[];
-        $lesMois = DB::table('fichefrais')->select('mois')->distinct()->orderBy('mois', 'desc')->get();
+
+        $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', Input::get('idVisiteur'))->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
             $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
             $afficheMois[] = $tempMois;
         }
-        $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
 
-
-        mois
-
-        return View('v_afficherValideFrais', compact('afficheMois','lesVisiteurs'));
+        return $afficheMois;
     }
 
     public function afficherFiche(){

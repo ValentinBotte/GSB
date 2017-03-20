@@ -18,6 +18,7 @@ Route::post('/afficher_renseigner_frais', 'GererFraisController@ajoutFraisForfai
 // COMPTABLE
 
 Route::get('/afficher_valide_frais', 'ComptableFraisController@valideFrais');
+Route::get('/afficher_valide_frais/getMois', 'ComptableFraisController@getMois');
 
 Route::post('/afficher_valide_frais', 'ComptableFraisController@afficherFiche');
 

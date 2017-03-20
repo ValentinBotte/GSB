@@ -9,9 +9,10 @@
         <div class="col-md-4">
             <form action="" method="post" role="form">
                 {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="lstVisiteur" accesskey="n">Visiteurs : </label>
+                <div class="form-group"><br>
                     <select id="lstVisiteur" name="visiteur" class="form-control">
+
+                        <option value="" disabled selected>Choisir un visiteur</option>
 
                         @foreach ($lesVisiteurs as $unVisiteur)
                             <option value="{{ $unVisiteur->id }}">{{ $unVisiteur->name }}</option>
@@ -21,13 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
-                    <select id="lstMois" name="mois" class="form-control">
-
-                        @foreach ($afficheMois as $unMois)
-                            <option value="{{ $unMois }}">{{ $unMois }}</option>
-                        @endforeach
-
-                    </select>
+                    <select id="lstMois" name="mois" class="form-control"></select>
                 </div>
                 <input id="ok" type="submit" value="Valider" class="btn btn-success" role="button" />
                 <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" role="button" />
