@@ -93,6 +93,8 @@
         </div>
     @endif
 
+    <script src="{{asset('js/ajax.js')}}"></script>
+
 @endsection
 
 
