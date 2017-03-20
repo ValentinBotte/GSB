@@ -26,6 +26,10 @@ class ComptableFraisController extends Controller
             $afficheMois[] = $tempMois;
         }
         $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
+
+
+        mois
+
         return View('v_afficherValideFrais', compact('afficheMois','lesVisiteurs'));
     }
 

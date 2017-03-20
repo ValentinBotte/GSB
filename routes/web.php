@@ -30,5 +30,6 @@ Route::get('/deconnexion', 'DeconnexionController@index');
 
 
 
+
 Auth::routes();
 

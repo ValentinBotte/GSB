@@ -7,6 +7,11 @@ $(function() {
 
     $("#lstVisiteur").change(function() {
 
+
+        $("#lstVisiteur option:selected").val()
+
+
     });
+
 
 });
