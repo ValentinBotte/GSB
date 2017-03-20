@@ -4,5 +4,9 @@
 
 
 $(function() {
-    alert('test');
+
+    $("#lstVisiteur").change(function() {
+
+    });
+
 });
