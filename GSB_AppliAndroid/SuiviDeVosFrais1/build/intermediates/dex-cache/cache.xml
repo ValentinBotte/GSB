@@ -3,84 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\nicoli.r\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.0_a1f5edf604985e6a0b3facb4b117a6e8338b368a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\xampp\htdocs\GSB\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_437dd4f6206a2e8973fa198e0785227d06756479\classes.dex" />
+        <dex dex="C:\xampp\htdocs\GSB\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_68aed5c811fb0525682c72fc8700880fcdb23f05\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\4c2489c3811ba35881e661a2f8bc247856920690\output\jars\classes.jar"
+        jar="C:\xampp\htdocs\GSB\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c31fb7308df45a30cf3fd020f85e600083409e52\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\3237cc2901ec256c7528540625f8531eae5b5a6e\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2695f52231c4084d800827e60754877be14f67bb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\5b8a5296eb1942e15069e3b89215fc7350b5cd62\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dcbabe01a5212d23fa4766f49d9db232100f5b09\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\81f1425a1168fdf865bba3f2b8d97315ce8c745e\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f14e1ef0eb9215cf76039079d0f51deaf85ffbd0\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\89558a3f34e89148a0a7b060b474b8f428d71b8a\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_88f0b62fe952162f495b34148eb15868d52c6131\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\nicoli.r\.android\build-cache\700788a7ccc5e452f29388e17fa6c7b311231df0\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d5f7b44f6da19c71d021656b3ef3f8679cdc3f9b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="686c55f0f0b1c34993dd4b0aebb6bb1d514566e4">
-        <dex dex="C:\xampp\htdocs\GSBBase\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_61dc180019c41aed038a8bf5179beaf589f479a8\classes.dex" />
+        sha1="1023fbb5fa8dedd0827fe1ddc8628016e52a7225">
+        <dex dex="C:\xampp\htdocs\GSB\GSB_AppliAndroid\SuiviDeVosFrais1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_a869a5778f3f599abad75000a64ed44c7a28fd6c\classes.dex" />
     </item>
 
 </items>

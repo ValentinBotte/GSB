@@ -67,17 +67,6 @@ public class HfRecapActivity extends Activity {
     	}) ;
     }
 
-	/**
-	 * Suppression de la ligne lors du click sur la croix
-	 */
-	private void imgSuppr_clic() {
-		((ImageView)findViewById(R.id.imgSuppr)).setOnClickListener(new ImageView.OnClickListener() {
-			public void onClick(View v) {
-
-			}
-		}) ;
-	}
-
     /**
      * Sur le changement de date : mise à jour de l'affichage de la qte
      */

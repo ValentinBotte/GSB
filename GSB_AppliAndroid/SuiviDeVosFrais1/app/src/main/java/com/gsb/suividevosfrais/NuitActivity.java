@@ -87,7 +87,7 @@ public class NuitActivity extends Activity {
     private void cmdPlus_clic() {
         ((Button)findViewById(R.id.cmdNuitPlus)).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                qte+=10 ;
+                qte+=1 ;
                 enregNewQte() ;
             }
         }) ;
@@ -99,7 +99,7 @@ public class NuitActivity extends Activity {
     private void cmdMoins_clic() {
         ((Button)findViewById(R.id.cmdNuitMoins)).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                qte = Math.max(0, qte-10) ; // suppression de 10 si possible
+                qte = Math.max(0, qte-1) ; // suppression de 10 si possible
                 enregNewQte() ;
             }
         }) ;

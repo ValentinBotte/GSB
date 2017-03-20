@@ -1,4 +1,4 @@
-#Mon Mar 06 11:25:43 CET 2017
-base.0=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8
+#Mon Mar 20 10:25:11 CET 2017
+base.0=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8
 renamed.0=classes.dex
-file.0=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8\\classes.dex
+file.0=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8\\classes.dex

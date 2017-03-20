@@ -1,7 +1,7 @@
-#Mon Mar 13 10:07:47 CET 2017
-base.0=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_61dc180019c41aed038a8bf5179beaf589f479a8
+#Mon Mar 20 10:25:11 CET 2017
+base.0=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_68aed5c811fb0525682c72fc8700880fcdb23f05
 renamed.1=classes.dex
 renamed.0=classes2.dex
-file.1=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_437dd4f6206a2e8973fa198e0785227d06756479\\classes.dex
-base.1=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_437dd4f6206a2e8973fa198e0785227d06756479
-file.0=C\:\\xampp\\htdocs\\GSBBase\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_61dc180019c41aed038a8bf5179beaf589f479a8\\classes.dex
+file.1=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_a869a5778f3f599abad75000a64ed44c7a28fd6c\\classes.dex
+base.1=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_a869a5778f3f599abad75000a64ed44c7a28fd6c
+file.0=C\:\\xampp\\htdocs\\GSB\\GSB_AppliAndroid\\SuiviDeVosFrais1\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_68aed5c811fb0525682c72fc8700880fcdb23f05\\classes.dex

@@ -65,6 +65,7 @@ public class FraisHfAdapter extends BaseAdapter {
 		TextView txtListJour ;
 		TextView txtListMontant ;
 		TextView txtListMotif ;
+		ImageView btnDelete;
 	}
 	/**
 	 * Affichage dans la liste
@@ -78,10 +79,27 @@ public class FraisHfAdapter extends BaseAdapter {
 			holder.txtListJour = (TextView)convertView.findViewById(R.id.txtListJour) ;
 			holder.txtListMontant = (TextView)convertView.findViewById(R.id.txtListMontant) ;
 			holder.txtListMotif = (TextView)convertView.findViewById(R.id.txtListMotif) ;
+			holder.btnDelete = (ImageView) convertView.findViewById(R.id.imgSuppr);
 			convertView.setTag(holder) ;
 		}else{
 			holder = (ViewHolder)convertView.getTag();
 		}
+		holder.btnDelete.setTag(index);
+
+
+
+		holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String pos = v.getTag().toString();
+				int position = Integer.parseInt(pos);
+				lesFrais.remove(position);
+                //Serializer.serialize(Global.filename, Global.listFraisMois, HfRecapActivity.this) ;
+				notifyDataSetChanged();
+
+			}
+		});
 
 		holder.txtListJour.setText(String.format(Locale.FRANCE, "%d", lesFrais.get(index).getJour())) ;
 		holder.txtListMontant.setText(String.format(Locale.FRANCE, "%d", lesFrais.get(index).getMontant())) ;
