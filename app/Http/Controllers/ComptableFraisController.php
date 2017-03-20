@@ -29,22 +29,29 @@ class ComptableFraisController extends Controller
 
         $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', Input::get('idVisiteur'))->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
-            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
-            $afficheMois[] = $tempMois;
+            if(substr($unMois->mois, 0, 4) >= date('Y') - 1) {
+                $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+                $afficheMois[] = $tempMois;
+            }
         }
 
         return $afficheMois;
     }
 
     public function afficherFiche(){
-        $lesMois = DB::table('fichefrais')->select('mois')->distinct()->orderBy('mois', 'desc')->get();
-        foreach($lesMois as $unMois){
-            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
-            $afficheMois[] = $tempMois;
-        }
-        $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
+
         $mois = Input::get('mois');
         $visiteur = Input::get('visiteur');
+
+        $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', $visiteur)->orderBy('mois', 'desc')->get();
+        foreach($lesMois as $unMois){
+            if(substr($unMois->mois, 0, 4) >= date('Y') - 1){
+                $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+                $afficheMois[] = $tempMois;
+            }
+        }
+        $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
+
         $numMois = substr($mois, 0, 2);
         $numAnnee = substr($mois, 3, 8);
         $anneeMois = substr($mois, 3, 8) . substr($mois, 0, 2);

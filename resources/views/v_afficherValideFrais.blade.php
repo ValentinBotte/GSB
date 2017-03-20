@@ -22,7 +22,15 @@
                 </div>
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
-                    <select id="lstMois" name="mois" class="form-control"></select>
+                    <select id="lstMois" name="mois" class="form-control">
+
+                    @if(!empty($afficheMois))
+                        @foreach ($afficheMois as $unMois)
+                            <option value="">{{ $unMois }}</option>
+                        @endforeach
+                    @endif
+
+                    </select>
                 </div>
                 <input id="ok" type="submit" value="Valider" class="btn btn-success" role="button" />
                 <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" role="button" />
@@ -104,7 +112,6 @@
                         $('<option></option>').val(data[i]).html(data[i])
                     );
                 }
-
 
             });
 
