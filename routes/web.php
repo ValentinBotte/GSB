@@ -21,7 +21,7 @@ Route::get('/afficher_valide_frais', 'ComptableFraisController@valideFrais');
 
 Route::post('/afficher_valide_frais', 'ComptableFraisController@afficherFiche');
 
-Route::get('/afficher_suivi_frais', 'GererFraisController@afficherRf');
+Route::get('/afficher_suivi_frais', 'ComptableFraisController@suiviFiche');
 
 //
 

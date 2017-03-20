@@ -48,4 +48,8 @@ class ComptableFraisController extends Controller
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', '=', $visiteur)->where('mois', '=', $anneeMois)->get();
         return View('v_afficherValideFrais', compact('visiteur','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
     }
+
+    public function suiviFiche(){
+        return View('v_afficherSuiviFrais');
+    }
 }
