@@ -88,7 +88,28 @@
         </div>
     @endif
 
-    <script src="{{asset('js/ajax.js')}}"></script>
+    <script>
+
+        $("#lstVisiteur").change(function() {
+
+            var idVisiteur = $("#lstVisiteur option:selected").val();
+
+            $.get('{{ url('afficher_valide_frais') }}/getMois?idVisiteur=' + idVisiteur, function(data) {
+
+                $('#lstMois').empty();
+
+                for(var i = 0; i < data.length; i++){
+                    $('#lstMois').append(
+                        $('<option></option>').val(data[i]).html(data[i])
+                    );
+                }
+
+
+            });
+
+        });
+
+    </script>
 
 @endsection
 

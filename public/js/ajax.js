@@ -9,7 +9,9 @@ $(function() {
 
         var idVisiteur = $("#lstVisiteur option:selected").val();
 
-            $.get("http://127.0.0.1/GSB/public/afficher_valide_frais/getMois?idVisiteur=" + idVisiteur, function(data) {
+            var url = {{url('afficher_valide_frais')}} + "/getMois?idVisiteur=" + idVisiteur;
+
+            $.get("{{url('getMois?idVisiteur=" + idVisiteur, function(data) {
 
                 $('#lstMois').empty();
 
