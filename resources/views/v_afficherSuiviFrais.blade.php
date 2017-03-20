@@ -1,9 +1,7 @@
 @extends('layouts.appComptable')
 
 @section('content')
-    <div name="droite" style="float:left;width:80%;">
-        <div name="haut" style="margin: 2 2 2 2 ;height:10%;float:left;"><h1>Suivi de remboursement des Frais</h1></div>
-        <div name="bas" style="margin : 10 2 2 2;clear:left;background-color:77AADD;color:white;height:88%;">
+        <h1>Suivi de remboursement des Frais</h1>
             <form name="formConsultFrais" method="post" action="chercheFrais.php">
                 <h1> Période </h1>
                 <label class="titre">Mois/Année :</label> <input class="zone" type="text" name="dateConsult" size="12" />
@@ -34,8 +32,6 @@
                 <p class="titre"></p>
                 <div class="titre">Nb Justificatifs</div><input type="text" class="zone" size="4" name="hcMontant"/>
             </form>
-        </div>
-    </div>
 @endsection
 
 
