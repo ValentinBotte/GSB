@@ -13,7 +13,9 @@
                     <select id="lstVisiteur" name="visiteur" class="form-control">
 
                         <option value="" disabled selected>Choisir un visiteur</option>
-
+                        @if(!empty($visiteur2))
+                            <option value="{{ $visiteur2[0]->id }}" selected="selected">{{ $visiteur2[0]->name }}</option>
+                        @endif
                         @foreach ($lesVisiteurs as $unVisiteur)
                             <option value="{{ $unVisiteur->id }}">{{ $unVisiteur->name }}</option>
                         @endforeach
@@ -23,6 +25,9 @@
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
                     <select id="lstMois" name="mois" class="form-control">
+                        @if(!empty($mois))
+                            <option value="{{ $mois }}" selected="selected">{{ $mois }}</option>
+                        @endif
 
                     @if(!empty($afficheMois))
                         @foreach ($afficheMois as $unMois)
@@ -51,24 +56,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="panel panel-info">
-                <div class="panel-heading"><h3>Eléments forfaitisés</h3></div>
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                    <tr>
-                        <th class="ETP">libelle</th>
-                        <th class="KM">quantité</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($lesFraisForfait as $unFraisForfait)
-                        <tr>
-                            <td>{{$unFraisForfait->libelle}}</td>
-                            <td>{{$unFraisForfait->quantite}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <h3>Eléments forfaitisés</h3>
+            <div class="col-md-4">
+                <form method="post" action="{{ url("afficher_valide_frais/$visiteur") }}" role="form">
+                    {{ csrf_field() }}
+                    <fieldset>
+                        @foreach ($lesFraisForfait as $unFrais)
+                            <div class="form-group">
+                                <label for="idFrais">{{ $unFrais->libelle }}</label>
+                                <input type="text" id="idFrais" name="lesFrais{{ $unFrais->idfraisforfait }}" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
+                            </div>
+                        @endforeach
+                        <button class="btn btn-success" type="submit">Valider</button>
+                    </fieldset>
+                </form>
             </div>
         </div>
         <div class="row">

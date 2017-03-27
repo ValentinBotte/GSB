@@ -38,11 +38,19 @@ class ComptableFraisController extends Controller
         return $afficheMois;
     }
 
+    private $id = "";
+    private function setVisiteur($id){
+        $this->id = $id;
+    }
+    private function getVisiteur(){
+        return $this->id;
+    }
     public function afficherFiche(){
 
         $mois = Input::get('mois');
         $visiteur = Input::get('visiteur');
-
+        $this->setVisiteur(Input::get('visiteur'));
+        $visiteur2 = DB::table('visiteur')->where('id', '=', Input::get('visiteur'))->get();
         $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', $visiteur)->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
             if(substr($unMois->mois, 0, 4) >= date('Y') - 1){
@@ -60,8 +68,28 @@ class ComptableFraisController extends Controller
         $dateModif = $fiche[0]->datemodif;
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', '=', $visiteur)->where('mois', '=', $anneeMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', '=', $visiteur)->where('mois', '=', $anneeMois)->get();
-        return View('v_afficherValideFrais', compact('visiteur','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
+        return View('v_afficherValideFrais', compact('visiteur', 'visiteur2','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
     }
+
+    public function modifierFraisForfait($id){
+        $anneeMois = $this->annee.$this->mois;
+        $user = $this->getVisiteur();
+        dd($user);
+        $fraisEtp = Input::get('lesFraisETP');
+        $fraisKm = Input::get('lesFraisKM');
+        $fraisNui = Input::get('lesFraisNUI');
+        $fraisRep = Input::get('lesFraisREP');
+        if($fraisEtp!=null and $fraisKm!=null and $fraisNui!=null and $fraisRep!=null){
+            DB::table('lignefraisforfait')->where('idvisiteur', $user)->where('mois', $anneeMois)->where('idfraisforfait', 'NUI')->update(['quantite' => $fraisNui]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user)->where('mois', $anneeMois)->where('idfraisforfait', 'ETP')->update(['quantite' => $fraisEtp]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user)->where('mois', $anneeMois)->where('idfraisforfait', 'REP')->update(['quantite' => $fraisRep]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user)->where('mois', $anneeMois)->where('idfraisforfait', 'KM')->update(['quantite' => $fraisKm]);
+        }
+
+        return $this->afficherFiche();
+    }
+
+
 
     public function suiviFiche(){
         return View('v_afficherSuiviFrais');

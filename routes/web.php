@@ -22,6 +22,8 @@ Route::get('/afficher_valide_frais/getMois', 'ComptableFraisController@getMois')
 
 Route::post('/afficher_valide_frais', 'ComptableFraisController@afficherFiche');
 
+Route::post('/afficher_valide_frais/{id}', 'ComptableFraisController@modifierFraisForfait');
+
 Route::get('/afficher_suivi_frais', 'ComptableFraisController@suiviFiche');
 
 //
