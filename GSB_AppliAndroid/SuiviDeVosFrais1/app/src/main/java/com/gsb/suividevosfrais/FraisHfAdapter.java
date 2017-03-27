@@ -95,7 +95,7 @@ public class FraisHfAdapter extends BaseAdapter {
 				String pos = v.getTag().toString();
 				int position = Integer.parseInt(pos);
 				lesFrais.remove(position);
-                //Serializer.serialize(Global.filename, Global.listFraisMois, HfRecapActivity.this) ;
+                Serializer.serialize(Global.filename, Global.listFraisMois,context) ;
 				notifyDataSetChanged();
 
 			}
