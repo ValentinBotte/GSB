@@ -1,12 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-
+session_start();
 class ComptableFraisController extends Controller
 {
 
@@ -38,18 +39,12 @@ class ComptableFraisController extends Controller
         return $afficheMois;
     }
 
-    private $id = "";
-    private function setVisiteur($id){
-        $this->id = $id;
-    }
-    private function getVisiteur(){
-        return $this->id;
-    }
     public function afficherFiche(){
 
         $mois = Input::get('mois');
         $visiteur = Input::get('visiteur');
-        $this->setVisiteur(Input::get('visiteur'));
+        $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
+        $_SESSION['idVisiteur'] = $visiteur;
         $visiteur2 = DB::table('visiteur')->where('id', '=', Input::get('visiteur'))->get();
         $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', $visiteur)->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
@@ -72,9 +67,8 @@ class ComptableFraisController extends Controller
     }
 
     public function modifierFraisForfait($id){
-        $anneeMois = $this->annee.$this->mois;
-        $user = $this->getVisiteur();
-        dd($user);
+        $anneeMois = $_SESSION['mois'];
+        $user = $_SESSION['idVisiteur'];
         $fraisEtp = Input::get('lesFraisETP');
         $fraisKm = Input::get('lesFraisKM');
         $fraisNui = Input::get('lesFraisNUI');
