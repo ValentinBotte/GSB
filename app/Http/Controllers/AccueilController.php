@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\App;
 
 class AccueilController extends Controller
 {
@@ -41,8 +43,17 @@ class AccueilController extends Controller
             $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
             $unMois->mois = $tempMois;
         }
+        $pdf = App::make('dompdf.wrapper');
 
-        return View('v_afficherFicheFrais', compact('mois'));
+        $pdf->loadHTML(View('pdf')->render());
+
+        //return View('pdf');
+        return $pdf->stream();
+       // return View('v_afficherFicheFrais', compact('mois', 'user'));
+    }
+
+    public function generatePDF(){
+
     }
 
     /*
