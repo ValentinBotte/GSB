@@ -58,7 +58,7 @@
         <div class="row">
             <h3>Eléments forfaitisés</h3>
             <div class="col-md-4">
-                <form method="post" action="{{ url("afficher_valide_frais/$visiteur") }}" role="form">
+                <form method="post" action="{{ url("afficher_valide_frais/update") }}" role="form">
                     {{ csrf_field() }}
                     <fieldset>
                         @foreach ($lesFraisForfait as $unFrais)
@@ -81,6 +81,8 @@
                         <th class="date">Date</th>
                         <th class="libelle">Libellé</th>
                         <th class="montant">Montant</th>
+                        <th class="delete">Supprimer</th>
+                        <th class="report">Reporter</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,6 +91,10 @@
                             <td>{{$unFraisHorsForfait->date}}</td>
                             <td>{{$unFraisHorsForfait->libelle}}</td>
                             <td>{{$unFraisHorsForfait->montant}}</td>
+                            <td><a href="{{ url("afficher_valide_frais/supprimer/$unFraisHorsForfait->id") }}"
+                                   onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+                            <td><a href="{{ url("afficher_valide_frais/reporter/$unFraisHorsForfait->id") }}"
+                                   onclick="return confirm('Voulez-vous vraiment reporter ce frais?');">Reporter ce frais</a></td>
                         </tr>
                     @endforeach
                     </tbody>
