@@ -58,8 +58,15 @@ class ComptableFraisController extends Controller
         $etat = DB::table('etat')->select('libelle')->where('id', $fiche[0]->idetat)->get()[0]->libelle;
         $dateModif = $fiche[0]->datemodif;
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', '=', $visiteur)->where('mois', '=', $anneeMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
-        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', '=', $visiteur)->where('mois', '=', $anneeMois)->get();
-        return View('v_afficherValideFrais', compact('visiteur', 'visiteur2','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
+        $lesFraisHorsForfait = [];
+        $listeHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->get();
+        foreach ( $listeHorsForfait as $item){
+            $libelle = $item->libelle;
+            $verif = preg_match("#REFUSE#i","'.$libelle'");
+            if($verif == 0){
+                $lesFraisHorsForfait[] = $item;
+            }
+        }        return View('v_afficherValideFrais', compact('visiteur', 'visiteur2','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
     }
     public function afficherFiche(){
         $mois = Input::get('mois');
@@ -87,7 +94,6 @@ class ComptableFraisController extends Controller
 
     public function supprimerFraisForfait($id){
         $data['id'] = $id;
-        dd($data);
         $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
         $libelle = $libelleObjet[0]->libelle;
         $verif = preg_match("#REFUSE#i","'.$libelle'");
@@ -95,7 +101,50 @@ class ComptableFraisController extends Controller
             DB::table('lignefraishorsforfait')->where('id', '=', $data)->update(['libelle' => '[REFUSE]'.$libelle]);
         }
         return $this->utilitaire();
-       }
+    }
+
+    public function reporterFraisForfait($id){
+        $data['id'] = $id;
+        $dateModif = date('Y-m-d');
+        $anneeMoisBase = $_SESSION['mois'];
+        $annee = substr($anneeMoisBase,0,4);
+        $mois = substr($anneeMoisBase,4,5);
+        $mois = $mois+1;
+        if($mois>12){
+            $mois = $mois - 12;
+            $annee = $annee+1;
+        }
+        if($mois<10){
+            $mois = '0'.$mois;
+        }
+        $anneeMois = $annee.$mois;
+        $visiteur = DB::table('lignefraishorsforfait')->where('id', '=', $data)->where('mois', '=', $anneeMoisBase)->get();
+        $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $visiteur[0]->idvisiteur)->where('mois', $anneeMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $result = count($lesFraisForfait);
+        // SI IL N'Y A PAS DE VALEUR POUR CE MOIS
+        if($result == 0){
+            DB::table('fichefrais')->insert(
+                ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'nbjustificatifs' => 0, 'montantvalide' => 0, 'datemodif' => $dateModif, 'idetat' => 'CR' ]
+            );
+            $lesIdForfait = DB::table('fraisforfait')->select('id')->get();
+            foreach ($lesIdForfait as $idForfait){
+                DB::table('lignefraisforfait')->insert(
+                    ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'idfraisforfait' => $idForfait->id, 'quantite' => 0]
+                );
+            }
+            DB::table('lignefraishorsforfait')->where('id', '=', $data)->delete();
+            DB::table('lignefraishorsforfait')->insert(
+                ['id' => $visiteur[0]->id, 'idvisiteur' => $visiteur[0]->idvisiteur,  'mois' => $anneeMois, 'libelle' => $visiteur[0]->libelle, 'date' => $dateModif, 'montant' => $visiteur[0]->montant ]
+            );
+        }
+        else{
+            DB::table('lignefraishorsforfait')->where('id', '=', $data)->delete();
+            DB::table('lignefraishorsforfait')->insert(
+                ['id' => $visiteur[0]->id, 'idvisiteur' => $visiteur[0]->idvisiteur,  'mois' => $anneeMois, 'libelle' => $visiteur[0]->libelle, 'date' => $dateModif, 'montant' => $visiteur[0]->montant ]
+            );
+        }
+        return $this->utilitaire();
+    }
 
 
 

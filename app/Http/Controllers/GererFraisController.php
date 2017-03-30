@@ -41,15 +41,7 @@ class GererFraisController extends Controller
                 );
             }
         }
-        $lesFraisHorsForfait = [];
-        $listeHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->get();
-        foreach ( $listeHorsForfait as $item){
-            $libelle = $item->libelle;
-            $verif = preg_match("#REFUSE#i","'.$libelle'");
-            if($verif == 0){
-                $lesFraisHorsForfait[] = $item;
-            }
-        }
+        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', '=', $user->id)->where('mois', '=', $anneeMois)->get();
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
     }
 
