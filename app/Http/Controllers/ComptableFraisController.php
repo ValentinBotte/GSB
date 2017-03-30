@@ -27,7 +27,7 @@ class ComptableFraisController extends Controller
 
     public function getMois(){
         $afficheMois=[];
-
+        $_SESSION['visiteur'] = Input::get('idVisiteur');
         $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', Input::get('idVisiteur'))->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
             if(substr($unMois->mois, 0, 4) >= date('Y') - 1) {
@@ -38,7 +38,9 @@ class ComptableFraisController extends Controller
 
         return $afficheMois;
     }
+
     public function utilitaire(){
+        // ANNEE MOIS VIDE QUAND ON CHANGE DE MOIS APRES LA PREMIERE FOIS
         $anneeMois = $_SESSION['mois'];
         $visiteur = $_SESSION['visiteur'];
         $numMois = substr($anneeMois, 4, 5);
@@ -70,9 +72,7 @@ class ComptableFraisController extends Controller
     }
     public function afficherFiche(){
         $mois = Input::get('mois');
-        $visiteur = Input::get('visiteur');
         $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
-        $_SESSION['visiteur'] = $visiteur;
         return $this->utilitaire();
     }
 

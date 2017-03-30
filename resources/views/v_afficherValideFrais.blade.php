@@ -13,11 +13,12 @@
                     <select id="lstVisiteur" name="visiteur" class="form-control">
 
                         <option value="" disabled selected>Choisir un visiteur</option>
-                        @if(!empty($visiteur2))
-                            <option value="{{ $visiteur2[0]->id }}" selected="selected">{{ $visiteur2[0]->name }}</option>
-                        @endif
                         @foreach ($lesVisiteurs as $unVisiteur)
-                            <option value="{{ $unVisiteur->id }}">{{ $unVisiteur->name }}</option>
+                            @if(!empty($visiteur2) and $visiteur2[0]->id == $unVisiteur->id)
+                                <option value="{{ $visiteur2[0]->id }}" selected="selected">{{ $visiteur2[0]->name }}</option>
+                            @else
+                                <option value="{{ $unVisiteur->id }}">{{ $unVisiteur->name }}</option>
+                            @endif
                         @endforeach
 
                     </select>
@@ -25,13 +26,13 @@
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
                     <select id="lstMois" name="mois" class="form-control">
-                        @if(!empty($mois))
-                            <option value="{{ $mois }}" selected="selected">{{ $mois }}</option>
-                        @endif
-
                     @if(!empty($afficheMois))
                         @foreach ($afficheMois as $unMois)
-                            <option value="">{{ $unMois }}</option>
+                                @if(!empty($mois) and $mois == $unMois)
+                                    <option value="{{ $mois }}" selected="selected">{{ $mois }}</option>
+                                @else
+                                    <option value="">{{ $unMois }}</option>
+                                @endif
                         @endforeach
                     @endif
 
@@ -123,7 +124,6 @@
             });
 
         });
-
     </script>
 
 @endsection
