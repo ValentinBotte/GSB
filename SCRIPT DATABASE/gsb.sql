@@ -5274,7 +5274,7 @@ CREATE TABLE `fraisforfait` (
 INSERT INTO `fraisforfait` (`id`, `libelle`, `montant`) VALUES
 ('ETP', 'Forfait Etape', '110.00'),
 ('NUI', 'Nuitée Hôtel', '80.00'),
-('REP', 'Repas Restaurant', '25.00')
+('REP', 'Repas Restaurant', '25.00'),
 ('KM1', '4CV Diesel','0.52'), 
 ('KM2', '5/6CV Diesel','0.58'), 
 ('KM3', '4CV Essence','0.62'),
