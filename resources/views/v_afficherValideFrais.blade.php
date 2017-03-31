@@ -31,7 +31,7 @@
                                 @if(!empty($mois) and $mois == $unMois)
                                     <option value="{{ $mois }}" selected="selected">{{ $mois }}</option>
                                 @else
-                                    <option value="">{{ $unMois }}</option>
+                                    <option value="{{ $unMois }}">{{ $unMois }}</option>
                                 @endif
                         @endforeach
                     @endif
