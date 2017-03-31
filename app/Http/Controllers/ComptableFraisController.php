@@ -68,12 +68,23 @@ class ComptableFraisController extends Controller
             if($verif == 0){
                 $lesFraisHorsForfait[] = $item;
             }
-        }        return View('v_afficherValideFrais', compact('visiteur', 'visiteur2','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
+        }
+
+        return View('v_afficherValideFrais', compact('visiteur', 'visiteur2','mois','numMois','numAnnee','etat','dateModif','lesFraisForfait','lesFraisHorsForfait','lesVisiteurs','afficheMois','anneeMois'));
     }
-    public function afficherFiche(){
-        $mois = Input::get('mois');
-        $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
-        return $this->utilitaire();
+    public function actionElement(){
+        // Controler si le submit est fait sur supprimer/reporter
+        if(Input::get('submit') === "supprimer" || Input::get('submit') === "reporter"){
+            if(Input::get('submit') === "supprimer"){
+                return $this->supprimerFraisForfait();
+            }else if(Input::get('submit') === "reporter"){
+                return $this->reporterFraisForfait();
+            }
+        }else if(Input::get('submit') === "Valider"){ // ou valider
+            $mois = Input::get('mois');
+            $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
+            return $this->utilitaire();
+        }
     }
 
     public function modifierFraisForfait(){
@@ -92,8 +103,8 @@ class ComptableFraisController extends Controller
         return $this->utilitaire();
     }
 
-    public function supprimerFraisForfait($id){
-        $data['id'] = $id;
+    public function supprimerFraisForfait(){
+        $data['id'] =
         $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
         $libelle = $libelleObjet[0]->libelle;
         $verif = preg_match("#REFUSE#i","'.$libelle'");
@@ -103,8 +114,8 @@ class ComptableFraisController extends Controller
         return $this->utilitaire();
     }
 
-    public function reporterFraisForfait($id){
-        $data['id'] = $id;
+    public function reporterFraisForfait(){
+        $data['id'] = Input::get('id');
         $dateModif = date('Y-m-d');
         $anneeMoisBase = $_SESSION['mois'];
         $annee = substr($anneeMoisBase,0,4);

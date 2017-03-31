@@ -38,7 +38,7 @@
 
                     </select>
                 </div>
-                <input id="ok" type="submit" value="Valider" class="btn btn-success" role="button" />
+                <input id="ok" type="submit" name="submit" value="Valider" class="btn btn-success" role="button" />
                 <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" role="button" />
             </form>
         </div>
@@ -86,19 +86,23 @@
                         <th class="report">Reporter</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach ($lesFraisHorsForfait as $unFraisHorsForfait)
-                        <tr>
-                            <td>{{$unFraisHorsForfait->date}}</td>
-                            <td>{{$unFraisHorsForfait->libelle}}</td>
-                            <td>{{$unFraisHorsForfait->montant}}</td>
-                            <td><a href="{{ url("afficher_valide_frais/supprimer/$unFraisHorsForfait->id") }}"
-                                   onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
-                            <td><a href="{{ url("afficher_valide_frais/reporter/$unFraisHorsForfait->id") }}"
-                                   onclick="return confirm('Voulez-vous vraiment reporter ce frais?');">Reporter ce frais</a></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
+
+
+                        <tbody>
+                        @foreach ($lesFraisHorsForfait as $unFraisHorsForfait)
+                            <tr>
+                                <form method="post" action="" role="form">
+                                    {{ csrf_field() }}
+                                    <td>{{$unFraisHorsForfait->date}}</td>
+                                    <td>{{$unFraisHorsForfait->libelle}}</td>
+                                    <td>{{$unFraisHorsForfait->montant}}</td>
+                                    <input type="hidden" name="id" value="{{ $unFraisHorsForfait->id }}" />
+                                    <td><input type="submit" value="supprimer" name="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');"></td>
+                                    <td><input type="submit" value="reporter" name="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');"></td>
+                                </form>
+                            </tr>
+                        @endforeach
+                        </tbody>
                 </table>
             </div>
         </div>

@@ -21,13 +21,10 @@ Route::get('/afficher_valide_frais', 'ComptableFraisController@valideFrais');
 
 Route::get('/afficher_valide_frais/getMois', 'ComptableFraisController@getMois');
 
-Route::post('/afficher_valide_frais', 'ComptableFraisController@afficherFiche');
+Route::post('/afficher_valide_frais', 'ComptableFraisController@actionElement');
 
 Route::post('/afficher_valide_frais/update', 'ComptableFraisController@modifierFraisForfait');
 
-Route::get('/afficher_valide_frais/supprimer/{id}', 'ComptableFraisController@supprimerFraisForfait');
-
-Route::get('/afficher_valide_frais/reporter/{id}', 'ComptableFraisController@reporterFraisForfait');
 
 
 Route::get('/afficher_suivi_frais', 'ComptableFraisController@suiviFiche');
