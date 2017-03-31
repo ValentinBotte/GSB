@@ -43,6 +43,7 @@
             </form>
         </div>
     </div>
+
 @endsection
 
 @section('content_secondary')
@@ -73,6 +74,8 @@
                 </form>
             </div>
         </div>
+        </br>
+        </br>
         <div class="row">
             <div class="panel panel-info">
                 <div class="panel-heading"><h3>Eléments hors forfait</h3></div>
@@ -97,8 +100,8 @@
                                     <td>{{$unFraisHorsForfait->libelle}}</td>
                                     <td>{{$unFraisHorsForfait->montant}}</td>
                                     <input type="hidden" name="id" value="{{ $unFraisHorsForfait->id }}" />
-                                    <td><input type="submit" value="supprimer" name="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');"></td>
-                                    <td><input type="submit" value="reporter" name="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');"></td>
+                                    <td><input type="submit" value="supprimer" name="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');"></td>
+                                    <td><input type="submit" value="reporter" name="submit" class="btn btn-warning" onclick="return confirm('Voulez-vous vraiment reporter ce frais?');"></td>
                                 </form>
                             </tr>
                         @endforeach
@@ -106,6 +109,9 @@
                 </table>
             </div>
         </div>
+        <a href="{{ url('afficher_suivi_frais/valider') }}" class="btn btn-primary" role="button">Valider fiche de frais</a>
+        </br>
+        </br>
     @endif
 
 

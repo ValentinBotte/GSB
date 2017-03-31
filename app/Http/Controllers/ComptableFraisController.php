@@ -104,7 +104,7 @@ class ComptableFraisController extends Controller
     }
 
     public function supprimerFraisForfait(){
-        $data['id'] =
+        $data['id'] = Input::get('id');
         $libelleObjet = DB::table('lignefraishorsforfait')->select('libelle')->where('id', '=', $data)->get();
         $libelle = $libelleObjet[0]->libelle;
         $verif = preg_match("#REFUSE#i","'.$libelle'");
@@ -156,7 +156,14 @@ class ComptableFraisController extends Controller
         }
         return $this->utilitaire();
     }
-
+    public function validerFiche(){
+        $anneeMois = $_SESSION['mois'];
+        $visiteur = $_SESSION['visiteur'];
+        $dateModif = date('Y-m-d');
+        DB::table('fichefrais')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->update(['datemodif' => $dateModif]);
+        DB::table('fichefrais')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->update(['idetat' => 'VA']);
+        return redirect('');
+    }
 
 
     public function suiviFiche(){

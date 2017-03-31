@@ -21,6 +21,9 @@ Route::get('/afficher_valide_frais', 'ComptableFraisController@valideFrais');
 
 Route::get('/afficher_valide_frais/getMois', 'ComptableFraisController@getMois');
 
+Route::get('/afficher_suivi_frais/valider', 'ComptableFraisController@validerFiche');
+
+
 Route::post('/afficher_valide_frais', 'ComptableFraisController@actionElement');
 
 Route::post('/afficher_valide_frais/update', 'ComptableFraisController@modifierFraisForfait');
