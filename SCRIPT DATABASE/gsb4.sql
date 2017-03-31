@@ -5033,29 +5033,6 @@ INSERT INTO `visiteur` (`id`, `name`, `prenom`, `email`, `password`, `adresse`, 
 ('f39', 'Frémont', 'Fernande', 'ffremont', 'xs5tq', '4 route de la mer', '13012', 'Allauh', '1998-10-01', NULL, NULL, NULL),
 ('f4', 'Gest', 'Alain', 'agest', 'dywvt', '30 avenue de la mer', '13025', 'Berre', '1985-11-01', NULL, NULL, NULL);
 
---
--- Table de gestion des vehicule d'un visiteur
---
-CREATE TABLE IF NOT EXISTS vehicule (
-	id integer NOT NULL auto_increment,
-	idvisiteur char(4) NOT NULL,
-	libelle char(50) NOT NULL,
-	etat tinyint(1) NOT NULL DEFAULT 1,
-	idtype char(3) NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (idtype) REFERENCES fraisforfait(id),
-	FOREIGN KEY (idvisiteur) REFERENCES visiteur(id)
-)ENGINE=InnoDB;
-
-INSERT INTO vehicule (idvisiteur,etat,idtype,libelle)
-VALUES 	('a131',1,'KM2','Peugeot 308'),
-		('a131',0,'KM1','Ford KA'),
-		('a131',0,'KM3','Peugeot 106'),
-		('a131',0,'KM4','Audi A1'),
-		('a17',1,'KM2','Audi A3'),
-		('a17',0,'KM1','Fiat Multipla'),
-		('a17',0,'KM3','Renault Clio 2'),
-		('a17',0,'KM4','Ford Fiesta 3');
 
 --
 -- Index pour les tables exportées
