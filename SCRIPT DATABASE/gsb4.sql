@@ -5006,7 +5006,7 @@ CREATE TABLE `visiteur` (
 
 INSERT INTO `visiteur` (`id`, `name`, `prenom`, `email`, `password`, `adresse`, `cp`, `ville`, `dateembauche`, `remember_token`, `created_at`, `updated_at`) VALUES
 ('a131', 'Villechalane', 'Louis', 'lvillachane', '$2y$10$zvhVf8rHHD1gnGWCgd.GNuo8pGSv77Wnvib6hhIhsLuzSRB8LMjQ6', '8 rue des Charmes', '46000', 'Cahors', '2005-12-21', 'LabDuJV3PH8Js2HFoGmWr3IRmB72E8ziTU7pIfxpCCFXjCUfIZlaRWMs977K', NULL, NULL),
-('a17', 'Andre', 'David', 'dandre', 'oppg5', '1 rue Petit', '46200', 'Lalbenque', '1998-11-23', NULL, NULL, NULL),
+('a17', 'Andre', 'David', 'dandre', '$2y$10$zvhVf8rHHD1gnGWCgd.GNuo8pGSv77Wnvib6hhIhsLuzSRB8LMjQ6', '1 rue Petit', '46200', 'Lalbenque', '1998-11-23', 'LabDuJV3PH8Js2HFoGmWr3IRmB72E8ziTU7pIfxpCCFXjCUfIZlaRWMs977P', NULL, NULL),
 ('a55', 'Bedos', 'Christian', 'cbedos', 'gmhxd', '1 rue Peranud', '46250', 'Montcuq', '1995-01-12', NULL, NULL, NULL),
 ('a93', 'Tusseau', 'Louis', 'ltusseau', 'ktp3s', '22 rue des Ternes', '46123', 'Gramat', '2000-05-01', NULL, NULL, NULL),
 ('b13', 'Bentot', 'Pascal', 'pbentot', 'doyw1', '11 allée des Cerises', '46512', 'Bessines', '1992-07-09', NULL, NULL, NULL),
@@ -5082,6 +5082,8 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `visiteur`
   ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `visiteur` ADD `comptable` BOOLEAN NOT NULL DEFAULT FALSE AFTER `remember_token`;
 
 --
 -- AUTO_INCREMENT pour les tables exportées

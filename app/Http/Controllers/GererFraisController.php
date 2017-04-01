@@ -35,11 +35,21 @@ class GererFraisController extends Controller
                 ['idvisiteur' => $user->id, 'mois' => $anneeMois,  'nbjustificatifs' => 0, 'montantvalide' => 0, 'datemodif' => $dateModif, 'idetat' => 'CR' ]
             );
             $lesIdForfait = DB::table('fraisforfait')->select('id')->get();
+            $typeVehicule = DB::table('vehicule')->select('idtype')->where('idvisiteur', $user->id)->where('etat', 1)->get();
             foreach ($lesIdForfait as $idForfait){
-                DB::table('lignefraisforfait')->insert(
-                    ['idvisiteur' => $user->id, 'mois' => $anneeMois,  'idfraisforfait' => $idForfait->id, 'quantite' => 0]
-                );
+                if($idForfait->id == 'ETP' || $idForfait->id == 'NUI' || $idForfait->id == 'REP'){
+                    DB::table('lignefraisforfait')->insert(
+                        ['idvisiteur' => $user->id, 'mois' => $anneeMois,  'idfraisforfait' => $idForfait->id, 'quantite' => 0]
+                    );
+                }
             }
+            foreach ($typeVehicule as $idVehicule){
+                    DB::table('lignefraisforfait')->insert(
+                        ['idvisiteur' => $user->id, 'mois' => $anneeMois,  'idfraisforfait' => $idVehicule->idtype, 'quantite' => 0]
+                    );
+            }
+            $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
+
         }
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', '=', $user->id)->where('mois', '=', $anneeMois)->get();
         return View('v_listeFrais', compact('mois','annee','lesFraisForfait','lesFraisHorsForfait'));
@@ -48,18 +58,20 @@ class GererFraisController extends Controller
     public function ajoutFraisForfait(){
         $anneeMois = $this->annee.$this->mois;
         $user = Auth::user();
+        $typeVehicule = DB::table('vehicule')->select('idtype')->where('idvisiteur', $user->id)->where('etat', 1)->get();
+        $libelleKm = 'lesFrais'.$typeVehicule[0]->idtype;
         $dateFrais = Input::get('dateFrais');
         $libelle = Input::get('libelle');
         $montant = Input::get('montant');
         $fraisEtp = Input::get('lesFraisETP');
-        $fraisKm = Input::get('lesFraisKM');
+        $fraisKm = Input::get($libelleKm);
         $fraisNui = Input::get('lesFraisNUI');
         $fraisRep = Input::get('lesFraisREP');
         if($fraisEtp!=null and $fraisKm!=null and $fraisNui!=null and $fraisRep!=null){
             DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'NUI')->update(['quantite' => $fraisNui]);
             DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'ETP')->update(['quantite' => $fraisEtp]);
             DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'REP')->update(['quantite' => $fraisRep]);
-            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', 'KM')->update(['quantite' => $fraisKm]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $user->id)->where('mois', $anneeMois)->where('idfraisforfait', $typeVehicule[0]->idtype)->update(['quantite' => $fraisKm]);
         }
 
         if($dateFrais!=null and $libelle!=null and $montant!=null){

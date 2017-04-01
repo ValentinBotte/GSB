@@ -20,6 +20,7 @@
             </form>
         </div>
     </div>
+    <br>
 @endsection
 
 
@@ -75,4 +76,5 @@
             </form>
         </div>
     </div>
+    <br>
 @endsection

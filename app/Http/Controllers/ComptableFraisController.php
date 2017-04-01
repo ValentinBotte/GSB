@@ -90,15 +90,17 @@ class ComptableFraisController extends Controller
     public function modifierFraisForfait(){
         $anneeMois = $_SESSION['mois'];
         $visiteur = $_SESSION['visiteur'];
+        $typeVehicule = DB::table('vehicule')->select('idtype')->where('idvisiteur', $visiteur)->where('etat', 1)->get();
+        $libelleKm = 'lesFrais'.$typeVehicule[0]->idtype;
         $fraisEtp = Input::get('lesFraisETP');
-        $fraisKm = Input::get('lesFraisKM');
+        $fraisKm = Input::get($libelleKm);
         $fraisNui = Input::get('lesFraisNUI');
         $fraisRep = Input::get('lesFraisREP');
         if($fraisEtp!=null and $fraisKm!=null and $fraisNui!=null and $fraisRep!=null){
             DB::table('lignefraisforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->where('idfraisforfait', 'NUI')->update(['quantite' => $fraisNui]);
             DB::table('lignefraisforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->where('idfraisforfait', 'ETP')->update(['quantite' => $fraisEtp]);
             DB::table('lignefraisforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->where('idfraisforfait', 'REP')->update(['quantite' => $fraisRep]);
-            DB::table('lignefraisforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->where('idfraisforfait', 'KM')->update(['quantite' => $fraisKm]);
+            DB::table('lignefraisforfait')->where('idvisiteur', $visiteur)->where('mois', $anneeMois)->where('idfraisforfait', $typeVehicule[0]->idtype)->update(['quantite' => $fraisKm]);
         }
         return $this->utilitaire();
     }
