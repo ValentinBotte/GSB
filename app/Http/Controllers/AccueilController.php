@@ -52,14 +52,14 @@ class AccueilController extends Controller
        // return View('v_afficherFicheFrais', compact('mois', 'user'));
     }
 
-    public function generatePDF(){
+        public function generatePDF(){
 
-    }
+        }
 
-    /*
-     *  CONTROLER AFFICHAGE FICHE DE FRAIS POST
-     */
-    public function afficherFdfPost(){
+        /*
+         *  CONTROLER AFFICHAGE FICHE DE FRAIS POST
+         */
+        public function afficherFdfPost(){
 
         $user = Auth::user();
 
