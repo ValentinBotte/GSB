@@ -140,9 +140,17 @@ class ComptableFraisController extends Controller
                 ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'nbjustificatifs' => 0, 'montantvalide' => 0, 'datemodif' => $dateModif, 'idetat' => 'CR' ]
             );
             $lesIdForfait = DB::table('fraisforfait')->select('id')->get();
+            $typeVehicule = DB::table('vehicule')->select('idtype')->where('idvisiteur', $visiteur[0]->idvisiteur)->where('etat', 1)->get();
             foreach ($lesIdForfait as $idForfait){
+                if($idForfait->id == 'ETP' || $idForfait->id == 'NUI' || $idForfait->id == 'REP'){
+                    DB::table('lignefraisforfait')->insert(
+                        ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'idfraisforfait' => $idForfait->id, 'quantite' => 0]
+                    );
+                }
+            }
+            foreach ($typeVehicule as $idVehicule){
                 DB::table('lignefraisforfait')->insert(
-                    ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'idfraisforfait' => $idForfait->id, 'quantite' => 0]
+                    ['idvisiteur' => $visiteur[0]->idvisiteur, 'mois' => $anneeMois,  'idfraisforfait' => $idVehicule->idtype, 'quantite' => 0]
                 );
             }
             DB::table('lignefraishorsforfait')->where('id', '=', $data)->delete();
