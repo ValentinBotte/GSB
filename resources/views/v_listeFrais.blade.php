@@ -9,10 +9,17 @@
                 {{ csrf_field() }}
                 <fieldset>
                     @foreach ($lesFraisForfait as $unFrais)
+                        @if( $unFrais->libelle != 'Forfait Etape' and $unFrais->libelle != 'Nuitée Hôtel' and $unFrais->libelle != 'Repas Restaurant')
+                            <div class="form-group">
+                                <label for="idFrais">Nombre de km</label>
+                                <input type="text" id="idFrais" name="lesFrais{{ $unFrais->idfraisforfait }}" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
+                            </div>
+                        @else
                             <div class="form-group">
                                 <label for="idFrais">{{ $unFrais->libelle }}</label>
                                 <input type="text" id="idFrais" name="lesFrais{{ $unFrais->idfraisforfait }}" size="10" maxlength="5" value="{{ $unFrais->quantite }}" class="form-control">
                             </div>
+                        @endif
                     @endforeach
                     <button class="btn btn-success" type="submit">Ajouter</button>
                     <button class="btn btn-danger" type="reset">Effacer</button>

@@ -15,22 +15,27 @@ Route::get('/afficher_renseigner_frais', 'GererFraisController@afficherRf');
 
 Route::post('/afficher_renseigner_frais', 'GererFraisController@ajoutFraisForfait');
 
-// COMPTABLE
+// COMPTABLE VALIDE FRAIS
 
 Route::get('/afficher_valide_frais', 'ComptableFraisController@valideFrais');
 
 Route::get('/afficher_valide_frais/getMois', 'ComptableFraisController@getMois');
 
-Route::get('/afficher_suivi_frais/valider', 'ComptableFraisController@validerFiche');
+Route::get('/afficher_valide_frais/valider', 'ComptableFraisController@validerFiche');
 
 
 Route::post('/afficher_valide_frais', 'ComptableFraisController@actionElement');
 
 Route::post('/afficher_valide_frais/update', 'ComptableFraisController@modifierFraisForfait');
 
+// COMPTABLE SUIVI FRAIS
 
 
-Route::get('/afficher_suivi_frais', 'ComptableFraisController@suiviFiche');
+Route::get('/afficher_suivi_frais', 'ComptableSuiviFraisController@suiviFrais');
+
+Route::get('/afficher_suivi_frais/getMois', 'ComptableSuiviFraisController@getMois');
+
+Route::post('/afficher_suivi_frais', 'ComptableSuiviFraisController@actionElement');
 
 //
 

@@ -109,7 +109,7 @@
                 </table>
             </div>
         </div>
-        <a href="{{ url('afficher_suivi_frais/valider') }}" class="btn btn-primary" role="button">Valider fiche de frais</a>
+        <a href="{{ url('afficher_valide_frais/valider') }}" class="btn btn-primary" role="button">Valider fiche de frais</a>
         </br>
         </br>
     @endif
