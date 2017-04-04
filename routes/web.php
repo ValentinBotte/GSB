@@ -37,6 +37,8 @@ Route::get('/afficher_suivi_frais/getMois', 'ComptableSuiviFraisController@getMo
 
 Route::post('/afficher_suivi_frais', 'ComptableSuiviFraisController@actionElement');
 
+Route::get('/afficher_suivi_frais/valider', 'ComptableSuiviFraisController@validerFiche');
+
 //
 
 Route::get('/deconnexion', 'DeconnexionController@index');
