@@ -51,10 +51,17 @@
                     </thead>
                     <tbody>
                     @foreach ($lesFraisForfait as $unFraisForfait)
-                        <tr>
-                            <td>{{$unFraisForfait->libelle}}</td>
-                            <td>{{$unFraisForfait->quantite}}</td>
-                        </tr>
+                        @if( $unFraisForfait->libelle != 'Forfait Etape' and $unFraisForfait->libelle != 'Nuitée Hôtel' and $unFraisForfait->libelle != 'Repas Restaurant')
+                            <tr>
+                                <td>Nombre de km</td>
+                                <td>{{$unFraisForfait->quantite}}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{$unFraisForfait->libelle}}</td>
+                                <td>{{$unFraisForfait->quantite}}</td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
