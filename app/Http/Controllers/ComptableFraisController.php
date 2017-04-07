@@ -16,11 +16,27 @@ class ComptableFraisController extends Controller
         $this->middleware('auth');
         $this->mois = date('m');
         $this->annee = date('Y');
+        $mois = $this->mois - 1;
+        $annee = $this->annee;
+        if($mois < 1){
+            $mois = $mois + 12;
+            $annee = $this->annee - 1;
+        }
+        if($mois<10){
+            $mois = '0'.$mois;
+        }else{
+            $mois = ''.$mois;
+        }
+        $anneeMois = $annee.$mois;
+        $lesOldFiches = DB::table('fichefrais')->where('mois', '=', $anneeMois)->where('idetat', '=', 'CR')->get();
+        foreach($lesOldFiches as $uneFiche){
+            DB::table('fichefrais')->where('idvisiteur', $uneFiche->idvisiteur)->where('mois', $anneeMois)->update(['idetat' => 'CL']);
+        }
     }
 
     public function valideFrais(){
 
-        $lesVisiteurs = DB::table('visiteur')->where('comptable', '=', 0)->orderBy('name')->get();
+        $lesVisiteurs = DB::table('visiteur')->select('id','name','prenom','email','comptable')->join('fichefrais', 'fichefrais.idvisiteur', '=', 'visiteur.id')->where('comptable', '=', 0)->where('idetat', '=', 'CL')->groupBy('id','name','prenom','email','comptable')->orderBy('name')->get();
 
         return View('v_afficherValideFrais', compact('lesVisiteurs'));
     }
@@ -28,7 +44,7 @@ class ComptableFraisController extends Controller
     public function getMois(){
         $afficheMois=[];
         $_SESSION['visiteur'] = Input::get('idVisiteur');
-        $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', Input::get('idVisiteur'))->orderBy('mois', 'desc')->get();
+        $lesMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', '=', Input::get('idVisiteur'))->where('idetat', '=', 'CL')->orderBy('mois', 'desc')->get();
         foreach($lesMois as $unMois){
             if(substr($unMois->mois, 0, 4) >= date('Y') - 1) {
                 $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);

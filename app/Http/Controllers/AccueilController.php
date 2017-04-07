@@ -37,19 +37,22 @@ class AccueilController extends Controller
     public function afficherFdf(){
 
         $user = Auth::user();
-        $mois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->orderBy('mois', 'desc')->get();
-
-        foreach($mois as $unMois){
-            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
-            $unMois->mois = $tempMois;
+        $anneemoins = date('Y') - 1;
+        $annee = $anneemoins.date('m');
+        $afficheMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->where('mois', '>=',$annee)->orderBy('mois', 'desc')->get();
+        foreach($afficheMois as $unMois){
+            if(substr($unMois->mois, 0, 4) >= date('Y') - 1) {
+                $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+                $unMois->mois = $tempMois;
+            }
         }
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML(View('pdf')->render());
 
         //return View('pdf');
-        return $pdf->stream();
-       // return View('v_afficherFicheFrais', compact('mois', 'user'));
+        //return $pdf->stream();
+        return View('v_afficherFicheFrais', compact('afficheMois', 'user'));
     }
 
         public function generatePDF(){
@@ -61,14 +64,19 @@ class AccueilController extends Controller
          */
         public function afficherFdfPost(){
 
+
         $user = Auth::user();
 
         //Ancienne variable pour affFdf
-        $mois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->orderBy('mois', 'desc')->get();
-        foreach($mois as $unMois){
-            $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
-            $unMois->mois = $tempMois;
-        }
+            $anneemoins = date('Y') - 1;
+            $annee = $anneemoins.date('m');
+            $afficheMois = DB::table('fichefrais')->select('mois')->where('idvisiteur', $user->id)->where('mois', '>=',$annee)->orderBy('mois', 'desc')->get();
+            foreach($afficheMois as $unMois){
+                if(substr($unMois->mois, 0, 4) >= date('Y') - 1) {
+                    $tempMois = substr($unMois->mois, 4, 6) . '/' . substr($unMois->mois, 0, 4);
+                    $unMois->mois = $tempMois;
+                }
+            }
 
         $moisPost = Input::get('mois');
         $leMois = substr($moisPost, 3, 8) . substr($moisPost, 0, 2);
@@ -82,7 +90,7 @@ class AccueilController extends Controller
         $dateModif = $fiche[0]->datemodif;
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
-        return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'mois','lesFraisHorsForfait','lesFraisForfait'));
+        return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'moisPost', 'afficheMois','lesFraisHorsForfait','lesFraisForfait'));
     }
 
 

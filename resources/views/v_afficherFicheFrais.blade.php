@@ -12,15 +12,16 @@
                 <div class="form-group">
                     <label for="lstMois" accesskey="n">Mois : </label>
                     <select id="lstMois" name="mois" class="form-control">
-
-                        @foreach ($mois as $unMois)
-                            <option value="{{ $unMois->mois }}">{{ $unMois->mois }}</option>
+                        @foreach ($afficheMois as $unMois)
+                            @if(!empty($moisPost) and $moisPost == $unMois->mois)
+                                <option value="{{ $moisPost }}" selected="selected">{{ $moisPost }}</option>
+                            @else
+                                <option value="{{ $unMois->mois }}">{{ $unMois->mois }}</option>
+                            @endif
                         @endforeach
-
                     </select>
                 </div>
                 <input id="ok" type="submit" value="Valider" class="btn btn-success" role="button" />
-                <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" role="button" />
             </form>
         </div>
     </div>
