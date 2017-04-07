@@ -18,8 +18,8 @@
 
     <div id="tableau">
         <div id="body" style="margin-left: 50px;">
-            <p style="text-align: left; margin-left: 20px; margin-top: 40px;"><b>Visiteur : </b>NRD/125-01 Jamy LEPLAT AUFRAY</p>
-            <p style="text-align: left; margin-left: 20px; margin-bottom: 40px;"><b>Mois : </b>Decembre 2016</p>
+            <p style="text-align: left; margin-left: 20px; margin-top: 40px;"><b>Visiteur : </b>{{ $user->id }} {{ $user->prenom }} {{ $user->name }}</p>
+            <p style="text-align: left; margin-left: 20px; margin-bottom: 40px;"><b>Mois : </b>{{ $numMois }} {{ $numAnnee }}</p>
 
             <!--DIV TABLEAU-->
 
@@ -33,28 +33,25 @@
                     <th>Total</th>
                 </tr>
                 </thead>
+                @foreach ($lesFraisForfait as $unFraisForfait)
 
-                <tbody>
-                <tr>
-                    <td>Nuitée</td>
-                    <td>9</td>
-                    <td>80.00</td>
-                    <td>630.00</td>
-                </tr>
+                    @if( $unFraisForfait->libelle != 'Forfait Etape' and $unFraisForfait->libelle != 'Nuitée Hôtel' and $unFraisForfait->libelle != 'Repas Restaurant')
+                        <tr>
+                            <td>Nombre de km</td>
+                            <td>{{$unFraisForfait->quantite}}</td>
+                            <td>{{$unFraisForfait->montant}}</td>
+                            <td>{{ $unFraisForfait->quantite*$unFraisForfait->montant }}</td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td>{{$unFraisForfait->libelle}}</td>
+                            <td>{{$unFraisForfait->quantite}}</td>
+                            <td>{{$unFraisForfait->montant}}</td>
+                            <td>{{ $unFraisForfait->quantite*$unFraisForfait->montant }}</td>
+                        </tr>
+                        @endif
+                @endforeach
 
-                <tr>
-                    <td>Repas Midi</td>
-                    <td>12</td>
-                    <td>29.00</td>
-                    <td>348.00</td>
-                </tr>
-
-                <tr>
-                    <td>Véhicule</td>
-                    <td>750</td>
-                    <td>0.67</td>
-                    <td>502.50</td>
-                </tr>
                 </tbody>
             </table>
 
@@ -73,17 +70,13 @@
 
                 <tbody>
 
+                @foreach ($lesFraisHorsForfait as $unFraisHorsForfait)
                     <tr>
-                        <td>18/12/2016</td>
-                        <td>Repas Représentation</td>
-                        <td>156.00</td>
+                        <td>{{$unFraisHorsForfait->date}}</td>
+                        <td>{{$unFraisHorsForfait->libelle}}</td>
+                        <td>{{$unFraisHorsForfait->montant}}</td>
                     </tr>
-
-                    <tr>
-                        <td>22/12/2016</td>
-                        <td>Achat Fleuriste Soirée "MediLog"</td>
-                        <td>120.30</td>
-                    </tr>
+                @endforeach
 
                 </tbody>
 
@@ -91,8 +84,8 @@
 
             <table border="1" style="width: auto; margin-left: auto; margin-top: -50px; margin-bottom: 25px; margin-right: 140px;">
                 <tr>
-                    <td style="padding:5px">Total 12/2016</td>
-                    <td style="padding:5px; padding-left: 15px">17886.80</td>
+                    <td style="padding:5px">Total {{$numMois}}/{{$numAnnee}}</td>
+                    <td style="padding:5px; padding-left: 15px">{{ $total }}</td>
                 </tr>
             </table>
         </div>

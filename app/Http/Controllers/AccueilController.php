@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\App;
-
+session_start();
 class AccueilController extends Controller
 {
 
@@ -73,6 +73,7 @@ class AccueilController extends Controller
 
         $moisPost = Input::get('mois');
         $leMois = substr($moisPost, 3, 8) . substr($moisPost, 0, 2);
+        $_SESSION['mois']=$moisPost;
         $fiche = DB::table('fichefrais')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
 
         // Variables de retour
@@ -87,9 +88,23 @@ class AccueilController extends Controller
     }
 
     public function export(){
+        $user = Auth::user();
+        $total =0;
+        $leMois=$_SESSION['mois'];
+        $numMois = substr($leMois, 0, 2);
+        $numAnnee = substr($leMois, 3, 8);
+        $leMois= substr($leMois, 3, 8) . substr($leMois, 0, 2);
+        $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
+        $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
+        foreach ($lesFraisForfait as $unFraisForfait){
+            $total=$total+$unFraisForfait->montant*$unFraisForfait->quantite ;
+        }
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait){
+            $total=$total+$unFraisHorsForfait->montant;
+        }
         $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML(View('pdf')->render());
+        $pdf->loadHTML(View('pdf', compact('user','numMois','numAnnee', 'libEtat', 'afficheMois','lesFraisHorsForfait','lesFraisForfait','total'))->render());
 
         //return View('pdf');
         return $pdf->stream();
