@@ -13,6 +13,7 @@
     <meta name="author" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/monCss.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -28,10 +29,10 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right" role="tablist">
-                            <li><a href="../public/">Accueil</a></li>
-                            <li><a href="{{ url('afficher_valide_frais') }}"><span class="glyphicon glyphicon-pencil"></span> Validation fiche de frais</a></li>
-                            <li><a href="{{ url('afficher_suivi_frais') }}"><span class="glyphicon glyphicon-list-alt"></span> Suivi des fiches de frais</a></li>
-                            <li><a href="{{ url('deconnexion') }}">Déconnexion</a></li>
+                            <li><a class="orange" href="../public/">Accueil</a></li>
+                            <li><a class="orange" href="{{ url('afficher_valide_frais') }}"><span class="glyphicon glyphicon-pencil"></span> Validation fiche de frais</a></li>
+                            <li><a class="orange" href="{{ url('afficher_suivi_frais') }}"><span class="glyphicon glyphicon-list-alt"></span> Suivi des fiches de frais</a></li>
+                            <li><a class="orange" href="{{ url('deconnexion') }}">Déconnexion</a></li>
                         </ul>
                     </div>
                 </div>

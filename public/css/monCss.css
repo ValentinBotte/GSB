@@ -1,0 +1,15 @@
+.panel-heading{
+    color: #ffffff !important;
+    background-color: #ff4814 !important;
+    border-color: #ff4814 !important;
+}
+.panel-primary{
+    border-color: #ff4814 !important;
+}
+.btn-primary{
+    background-color: #ff4814 !important;
+    border-color: #ff4814 !important;
+}
+.orange{
+    color: #ff4814 !important;;
+}
