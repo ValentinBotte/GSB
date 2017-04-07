@@ -37,7 +37,6 @@ class ComptableFraisController extends Controller
     public function valideFrais(){
 
         $lesVisiteurs = DB::table('visiteur')->select('id','name','prenom','email','comptable')->join('fichefrais', 'fichefrais.idvisiteur', '=', 'visiteur.id')->where('comptable', '=', 0)->where('idetat', '=', 'CL')->groupBy('id','name','prenom','email','comptable')->orderBy('name')->get();
-
         return View('v_afficherValideFrais', compact('lesVisiteurs'));
     }
 
@@ -97,9 +96,14 @@ class ComptableFraisController extends Controller
                 return $this->reporterFraisForfait();
             }
         }else if(Input::get('submit') === "Valider"){ // ou valider
-            $mois = Input::get('mois');
-            $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
-            return $this->utilitaire();
+            if(Input::get('mois') == null){
+                return $this->valideFrais();
+            }
+            else {
+                $mois = Input::get('mois');
+                $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
+                return $this->utilitaire();
+            }
         }
     }
 

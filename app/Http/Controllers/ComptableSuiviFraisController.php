@@ -71,6 +71,9 @@ class ComptableSuiviFraisController extends Controller
     }
 
     public function actionElement(){
+            if(Input::get('mois') == null){
+                return $this->suiviFrais();
+            }
             $mois = Input::get('mois');
             $_SESSION['mois'] = substr($mois, 3, 8) . substr($mois, 0, 2);
             return $this->utilitaire();
