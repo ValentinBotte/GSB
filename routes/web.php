@@ -7,6 +7,8 @@ Route::get('/', 'AccueilController@index');
 
 Route::get('/afficher_fiche_de_frais', 'AccueilController@afficherFdf');
 
+Route::get('/afficher_fiche_de_frais/export', 'AccueilController@export');
+
 Route::post('/afficher_fiche_de_frais', 'AccueilController@afficherFdfPost');
 
 Route::get('/afficher_renseigner_frais/{id}', 'GererFraisController@supprimerFiche');

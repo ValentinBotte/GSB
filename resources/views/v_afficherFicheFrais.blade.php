@@ -83,6 +83,8 @@
                 </table>
             </div>
         </div>
+        <a href="{{ url('afficher_fiche_de_frais/export') }}" class="btn btn-primary" role="button">Export en PDF</a>
+        </br>
     @endif
 
 @endsection

@@ -46,18 +46,11 @@ class AccueilController extends Controller
                 $unMois->mois = $tempMois;
             }
         }
-        $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML(View('pdf')->render());
 
-        //return View('pdf');
-        //return $pdf->stream();
         return View('v_afficherFicheFrais', compact('afficheMois', 'user'));
     }
 
-        public function generatePDF(){
-
-        }
 
         /*
          *  CONTROLER AFFICHAGE FICHE DE FRAIS POST
@@ -91,6 +84,15 @@ class AccueilController extends Controller
         $lesFraisForfait = DB::table('lignefraisforfait')->join('fraisforfait', 'fraisforfait.id', '=', 'lignefraisforfait.idfraisforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->orderBy('lignefraisforfait.mois', 'desc')->get();
         $lesFraisHorsForfait = DB::table('lignefraishorsforfait')->where('idvisiteur', $user->id)->where('mois', $leMois)->get();
         return View('v_afficherFicheFrais', compact('numMois', 'numAnnee', 'libEtat', 'dateModif', 'moisPost', 'afficheMois','lesFraisHorsForfait','lesFraisForfait'));
+    }
+
+    public function export(){
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML(View('pdf')->render());
+
+        //return View('pdf');
+        return $pdf->stream();
     }
 
 
